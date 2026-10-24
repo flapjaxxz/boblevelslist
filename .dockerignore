@@ -1,0 +1,8 @@
+target
+.git
+.github
+.env
+.secret
+.idea
+.vscode
+node_modules

@@ -90,8 +90,10 @@ impl GeolocationProvider for IpWhoIsGeolocationProvider {
 
 #[rocket::launch]
 async fn rocket() -> _ {
-    // Load the configuration from your .env file
-    dotenv::dotenv().unwrap();
+    // Load the configuration from your .env file, if there is one. On hosting platforms
+    // like Render there is no .env file and the configuration comes straight from the
+    // process environment, so a missing file must not be fatal.
+    let _ = dotenv::dotenv();
 
     // Load the translation files
     LocalesLoader::load(&[
