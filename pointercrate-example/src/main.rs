@@ -109,6 +109,19 @@ async fn rocket() -> _ {
     // DATABASE_URL environment variable
     let pool = PointercratePool::init().await;
 
+    // Optional bootstrap for the first administrator: if the INITIAL_ADMIN environment variable
+    // names an existing user, that user is granted all permissions on startup. Register the account
+    // on the website first, set the variable, restart, and then remove the variable again.
+    if let Ok(username) = std::env::var("INITIAL_ADMIN") {
+        let username = username.trim();
+
+        match pool.grant_all_permissions(username).await {
+            Ok(0) => eprintln!("INITIAL_ADMIN: no user named {username:?} exists yet. Register it on the website, then restart the service"),
+            Ok(_) => eprintln!("INITIAL_ADMIN: granted all permissions to {username:?}"),
+            Err(err) => eprintln!("INITIAL_ADMIN: failed to grant permissions: {err}"),
+        }
+    }
+
     // Set up the HTTP server
     let rocket = rocket::build()
         // Tell it about the connection pool to use (individual handlers can get hold of this pool by declaring an argument of type `&State<PointercratePool>`)

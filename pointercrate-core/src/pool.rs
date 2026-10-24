@@ -11,6 +11,21 @@ impl PointercratePool {
         self.connection_pool.clone()
     }
 
+    /// Grants the user with the given name every permission bit (administrator, moderator and
+    /// all list permissions). Returns the number of users that were updated (0 if no user with
+    /// that name exists).
+    ///
+    /// This exists to bootstrap the first administrator of a freshly deployed website without
+    /// needing database shell access.
+    pub async fn grant_all_permissions(&self, username: &str) -> std::result::Result<u64, sqlx::Error> {
+        let result = sqlx::query("UPDATE members SET permissions = B'0110000000001110'::BIT(16) WHERE lower(name) = lower($1)")
+            .bind(username)
+            .execute(&self.connection_pool)
+            .await?;
+
+        Ok(result.rows_affected())
+    }
+
     pub async fn init() -> Self {
         let pool = PointercratePool {
             connection_pool: PgPoolOptions::default()
