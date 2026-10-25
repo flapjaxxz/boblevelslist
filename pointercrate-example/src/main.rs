@@ -163,7 +163,11 @@ async fn rocket() -> _ {
         // Tab where users can modify their own accounts
         .with_page(ProfileTab)
         // Tab where users can initiate player claims and manage their claimed players
-        .with_page(ListIntegrationTab("https://discord.gg/tMBzYP77ag"))
+        // The link players are sent to for requesting claim verification. Set the DISCORD_URL environment
+        // variable to your own Discord invite; without it the link just points back at the home page.
+        .with_page(ListIntegrationTab(Box::leak(
+            std::env::var("DISCORD_URL").unwrap_or_else(|_| "/".to_string()).into_boxed_str(),
+        )))
         // Tab where website moderators can manage permissions. 
         // The vector below specified which permissions a user needs to have for the tab to be displayed.
         .with_page(UsersTab(vec![MODERATOR, LIST_ADMINISTRATOR]))
@@ -208,7 +212,7 @@ async fn rocket() -> _ {
 fn page_configuration() -> PageConfiguration {
     // Define a navigation bar with only two items, a link to the user account page,
     // and a link to your demonlist.
-    let nav_bar = NavigationBar::new("/static/images/path/to/your/logo.png")
+    let nav_bar = NavigationBar::new("Bob Levels List")
         .with_item(
             TopLevelNavigationBarItem::new(
                 Some("/demonlist/"),
@@ -239,11 +243,11 @@ fn page_configuration() -> PageConfiguration {
     // displayed below it, side-by-side, and potentially some social media links to
     // your team
     let footer = Footer::new(html! {
-        "© Copyright 2026 EasyGDPS Demonlist"
+        "© Copyright 2026 Bob Levels List"
         br;
         "All rights reserved"
         br;
-        "EasyGDPS Demonlist is in no way affiliated with RobTopGamesAB ® or pointercrate.com"
+        "Bob Levels List is in no way affiliated with RobTopGamesAB ® or pointercrate.com"
     })
     // Add a column with links for various list-related highlights
     .with_column(FooterColumn::LinkList {
@@ -259,14 +263,12 @@ fn page_configuration() -> PageConfiguration {
                 tr("footer-demonlist.legacy-list"),
             ),
         ],
-    })
-    // Some links to social media, for example your twitter
-    .with_link("https://twitter.com/stadust1971", tr("footer-tweet.developer"));
+    });
 
     // Stitching it all together into a page configuration
-    PageConfiguration::new("EasyGDPS Demonlist", nav_bar, footer)
+    PageConfiguration::new("Bob Levels List", nav_bar, footer)
         // Used for the HTML "author" meta tag
-        .author("EasyGDPS")
+        .author("Bob Levels List")
         // Used for the HTML "keywords" meta tag
-        .keywords("Geometry Dash, demonlist, GDPS, EasyGDPS")
+        .keywords("Geometry Dash, demonlist, Bob Levels List, levels list")
 }

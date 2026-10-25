@@ -74,6 +74,8 @@ claim-manager = Manage Claims
 
 claim-listed-user = Claim by user:
 claim-listed-player = Claim on player:
+claim-listed-verified = Verified
+claim-listed-deleted = Deleted
 
 claim-initiate-panel = Initiate Claim
     .info = Select the player you wish to claim below
@@ -82,8 +84,8 @@ claim-initiate-panel = Initiate Claim
 # clickable link to Pointercrate Central by default (this can be modified
 # in pointercrate-example/src/main.rs)
 claim-info-panel = Claiming 101
-    .info-a = Player claiming is the process of associated a demonlist player with a pointercrate user account. A verified claim allows you to to modify some of the player's properties, such as nationality.
-    .info-b = To initiate a claim, click the pen left of the 'Claimed Player' heading. Once initiated, you have an unverified claim on a player. These claims will then be manually verified by members of the pointercrate team. You can request verification in { $discord }.
+    .info-a = Player claiming is the process of associated a demonlist player with a Bob Levels List user account. A verified claim allows you to to modify some of the player's properties, such as nationality.
+    .info-b = To initiate a claim, click the pen left of the 'Claimed Player' heading. Once initiated, you have an unverified claim on a player. These claims will then be manually verified by members of the Bob Levels List team. You can request verification in { $discord }.
     .info-c = You cannot initiate a claim on a player that already has a verified claim by a different user on it.
 
     .info-discord = this discord server

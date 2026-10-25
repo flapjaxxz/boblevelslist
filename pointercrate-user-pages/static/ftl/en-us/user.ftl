@@ -29,7 +29,7 @@ auth-repeatpassword = Repeat Password:
 # in the .redirect attributes
 #
 login = Sign In
-    .oauth-info = If you have linked your pointercrate account with a Google account, you must sign in via Google oauth by clicking the button below:
+    .oauth-info = If you have linked your Bob Levels List account with a Google account, you must sign in via Google oauth by clicking the button below:
 
     .methods-separator = otherwise
 
@@ -38,14 +38,14 @@ login = Sign In
 
     .error-invalidcredentials = Invalid credentials
 
-    .redirect = Already have a pointercrate account? { $redirect-link } instead.
+    .redirect = Already have a Bob Levels List account? { $redirect-link } instead.
     .redirect-link = Sign in
 
 register = Sign Up
     .info = Create a new account. Please note that the username cannot be changed after account creation, so choose wisely!
     .submit = Sign Up
 
-    .redirect = Don't have a pointercrate account yet? { $redirect-link } for one!
+    .redirect = Don't have a Bob Levels List account yet? { $redirect-link } for one!
     .redirect-link = Sign up
 
 register-oauth = Pick your username:
@@ -54,7 +54,7 @@ register-oauth = Pick your username:
 ## Users tab
 users = Users
 
-user-viewer = Pointercrate Account Manager
+user-viewer = Bob Levels List Account Manager
     .welcome = Click on a user on the left to get started!
     .delete-user = Delete user
     .edit-user = Edit user
@@ -81,10 +81,10 @@ profile = Profile
     .header = Profile - {$username}
 
 profile-username = Username
-    .info = The name you registered under and which you use to log in to pointercrate. This name is unique to your account, and cannot be changed.
+    .info = The name you registered under and which you use to log in to Bob Levels List. This name is unique to your account, and cannot be changed.
 
 profile-display-name = Display name
-    .info = If set, this name will be displayed instead of your username. Display names aren't unique and you cannot use your display name to login to your pointercrate account.
+    .info = If set, this name will be displayed instead of your username. Display names aren't unique and you cannot use your display name to login to your Bob Levels List account.
 
     .dialog-header = Edit Display Name
     .dialog-newname = New display name:
@@ -102,7 +102,7 @@ profile-youtube = YouTube channel
     .newlink-validator-typemismatch = Please enter a valid URL
 
 profile-permissions = Permissions
-    .info = The permissions you have on pointercrate. 'List ...' means you're a member of the demonlist team. 'Moderator' and 'Administrator' mean you're part of pointercrate's staff team.
+    .info = The permissions you have on Bob Levels List. 'List ...' means you're a member of the demonlist team. 'Moderator' and 'Administrator' mean you're part of Bob Levels List's staff team.
 
 profile-delete-account = Delete My Account
     .dialog-header = Delete Account
@@ -128,11 +128,11 @@ profile-change-password = Change Password
     .repeatnewpassword-validator-notmatching = Passwords don't match
 
 profile-logout = Logout
-    .info = Log out of your pointercrate account in this browser.
+    .info = Log out of your Bob Levels List account in this browser.
     .button = Logout
 
 profile-get-token = Get access token
-    .info = Your pointercrate access token allows you, or programs authorized by you, to make API calls on your behalf. They do not allow modifications of your account however.
+    .info = Your Bob Levels List access token allows you, or programs authorized by you, to make API calls on your behalf. They do not allow modifications of your account however.
     .button = Get access token
 
     .view-header = Your access token is
@@ -142,4 +142,4 @@ profile-invalidate-tokens = Invalidate tokens
     .button = Invalidate all access tokens
 
 profile-oauth = Link With Google
-    .info = Enable signing in to your pointercrate account via Google oauth. More secure than password login, and avoids account lock-outs due to forgotten passwords. Linking a Google account is irreversible, and you cannot change the linked Google account later on!
+    .info = Enable signing in to your Bob Levels List account via Google oauth. More secure than password login, and avoids account lock-outs due to forgotten passwords. Linking a Google account is irreversible, and you cannot change the linked Google account later on!

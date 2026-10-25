@@ -40,46 +40,12 @@ impl From<OverviewPage> for PageFragment {
 impl OverviewPage {
     fn head(&self) -> Markup {
         html! {
-            (PreEscaped(r#"
-                <script type="application/ld+json">
-                {
-                    "@context": "http://schema.org",
-                    "@type": "WebPage",
-                    "breadcrumb": {
-                        "@type": "BreadcrumbList",
-                        "itemListElement": [
-                            {
-                                "@type": "ListItem",
-                                "position": 1,
-                                "item": {
-                                    "@id": "https://pointercrate.com/",
-                                    "name": "pointercrate"
-                                }
-                            },
-                            {
-                                "@type": "ListItem",
-                                "position": 2,
-                                "item": {
-                                    "@id": "https://pointercrate.com/demonlist/",
-                                    "name": "demonlist"
-                                }
-                            }
-                        ]
-                    },
-                    "name": "Geometry Dash Demonlist",
-                    "description": "The official pointercrate Demonlist!",
-                    "url": "https://pointercrate.com/demonlist/"
-                }
-                </script>
-            "#))
             (PreEscaped(format!("
                 <script>
                     window.list_length = {0};
                     window.extended_list_length = {1}
                 </script>", list_config::list_size(), list_config::extended_list_size())
             ))
-            // FIXME: abstract away
-            link ref = "canonical" href = "https://pointercrate.com/demonlist/";
         }
     }
 

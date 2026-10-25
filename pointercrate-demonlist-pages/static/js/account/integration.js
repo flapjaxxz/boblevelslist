@@ -50,6 +50,54 @@ class ClaimManager extends FilteredPaginator {
   }
 }
 
+// Clearly visible colours for the two end states of a claim. The default `.ok` / `.err` classes are
+// only faintly tinted, which is easy to miss on a white page.
+const CLAIM_STATE_STYLES = {
+  verified: {
+    className: "ok",
+    background: "#b7f0a6",
+    borderLeft: "6px solid #2f9e1f",
+    color: "#0b3d06",
+    label: "claim-listed-verified",
+    icon: "\u2714 ",
+  },
+  deleted: {
+    className: "err",
+    background: "#ffb8b8",
+    borderLeft: "6px solid #d11a2a",
+    color: "#520509",
+    label: "claim-listed-deleted",
+    icon: "\u2716 ",
+  },
+};
+
+function applyClaimState(li, state) {
+  const style = CLAIM_STATE_STYLES[state];
+
+  li.classList.remove("consider");
+  li.classList.add(style.className);
+  li.style.background = style.background;
+  li.style.borderLeft = style.borderLeft;
+  li.style.color = style.color;
+}
+
+function makeStatusLabel(state) {
+  const style = CLAIM_STATE_STYLES[state];
+
+  const label = document.createElement("b");
+  label.style.alignSelf = "center";
+  label.style.marginRight = "10px";
+  label.innerText = style.icon + tr("demonlist", "player", style.label);
+
+  return label;
+}
+
+function clearChildren(element) {
+  while (element.lastChild) {
+    element.removeChild(element.lastChild);
+  }
+}
+
 function generateClaim(claim) {
   let li = document.createElement("li");
 
@@ -86,8 +134,12 @@ function generateClaim(claim) {
 
   rightDiv.classList.add("flex");
 
+  const claimUrl =
+    "/api/v1/players/" + claim.player.id + "/claims/" + claim.user.id + "/";
+
   if (claim.verified) {
-    li.classList.add("ok");
+    applyClaimState(li, "verified");
+    rightDiv.appendChild(makeStatusLabel("verified"));
   } else {
     li.classList.add("consider");
     let button = makeButton("check");
@@ -95,27 +147,45 @@ function generateClaim(claim) {
 
     button.addEventListener("click", (event) => {
       event.stopPropagation();
-      patch(
-        "/api/v1/players/" + claim.player.id + "/claims/" + claim.user.id,
-        {},
-        { verified: true }
-      ).then(() => claimManager.refresh());
+      patch(claimUrl, {}, { verified: true })
+        .then(() => {
+          // Turn the row green right away, then reload the list from the server (verifying a claim
+          // also removes all other claims on the same player, so the list can change).
+          applyClaimState(li, "verified");
+          clearChildren(rightDiv);
+          rightDiv.appendChild(makeStatusLabel("verified"));
+          rightDiv.appendChild(makeDeleteButton());
+
+          return claimManager.refresh();
+        })
+        .catch(displayError(claimManager));
     });
 
     rightDiv.appendChild(button);
   }
 
-  let deleteButton = makeButton("trash-alt");
+  function makeDeleteButton() {
+    let deleteButton = makeButton("trash-alt");
 
-  deleteButton.addEventListener("click", (event) => {
-    event.stopPropagation();
-    del(
-      "/api/v1/players/" + claim.player.id + "/claims/" + claim.user.id,
-      {}
-    ).then(() => claimManager.refresh());
-  });
+    deleteButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      del(claimUrl, {})
+        .then(() => {
+          // Show the row in red for a moment so it is obvious what happened, then drop it from the list.
+          applyClaimState(li, "deleted");
+          li.style.pointerEvents = "none";
+          clearChildren(rightDiv);
+          rightDiv.appendChild(makeStatusLabel("deleted"));
 
-  rightDiv.appendChild(deleteButton);
+          setTimeout(() => claimManager.refresh(), 1500);
+        })
+        .catch(displayError(claimManager));
+    });
+
+    return deleteButton;
+  }
+
+  rightDiv.appendChild(makeDeleteButton());
   li.appendChild(rightDiv);
 
   li.dataset.playerId = claim.player.id;

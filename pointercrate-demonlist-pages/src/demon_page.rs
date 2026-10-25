@@ -71,42 +71,6 @@ impl DemonPage {
 
     fn head(&self) -> Markup {
         html! {
-            (PreEscaped(r##"
-                <script type="application/ld+json">
-                {
-                    "@context": "http://schema.org",
-                    "@type": "WebPage",
-                    "breadcrumb": {
-                        "@type": "BreadcrumbList",
-                        "itemListElement": [{
-                                "@type": "ListItem",
-                                "position": 1,
-                                "item": {
-                                    "@id": "https://pointercrate.com/",
-                                    "name": "pointercrate"
-                                }
-                            },{
-                                "@type": "ListItem",
-                                "position": 2,
-                                "item": {
-                                    "@id": "https://pointercrate.com/demonlist/",
-                                    "name": "demonlist"
-                                }
-                            },{
-                                "@type": "ListItem",
-                                "position": 3,
-                                "item": {
-                                    "@id": "https://pointercrate.com/demonlist/"##)) (self.data.position()) (PreEscaped(r##"/",
-                                    "name": ""##)) (self.data.name()) (PreEscaped(r##""
-                                }
-                            }
-                        ]
-                    },
-                    "name": "#"##)) (self.data.position()) " - " (self.data.name()) (PreEscaped(r##"","description": ""##)) (self.description().replace(r"\", r"\\")) (PreEscaped(r##"",
-                    "url": "https://pointercrate.com/demonlist/{0}/"
-                }
-                </script>
-            "##))
             (PreEscaped(format!("
                 <script>
                     window.list_length = {0};
@@ -242,7 +206,7 @@ impl DemonPage {
                     }
                     (PreEscaped(format!(r#"
                     <script>
-                    document.getElementById("demon-heading").addEventListener('click', () => navigator.clipboard.writeText('https://pointercrate.com/demonlist/permalink/{}/?redirect'))
+                    document.getElementById("demon-heading").addEventListener('click', () => navigator.clipboard.writeText(window.location.origin + '/demonlist/permalink/{}/?redirect'))
                     </script>
                     "#, self.data.demon.base.id)))
                     h3 {

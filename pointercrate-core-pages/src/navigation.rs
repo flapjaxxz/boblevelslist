@@ -27,13 +27,14 @@ struct NavigationBarItem {
 }
 
 pub struct NavigationBar {
-    logo_path: &'static str,
+    brand: &'static str,
     items: Vec<TopLevelNavigationBarItem>,
 }
 
 impl NavigationBar {
-    pub fn new(logo_path: &'static str) -> Self {
-        NavigationBar { logo_path, items: vec![] }
+    /// Creates a navigation bar showing `brand` (the website's name) as text on the left
+    pub fn new(brand: &'static str) -> Self {
+        NavigationBar { brand, items: vec![] }
     }
 
     pub fn with_item(mut self, item: TopLevelNavigationBarItem) -> Self {
@@ -96,8 +97,8 @@ impl Render for NavigationBar {
             header {
                 nav.center.collapse.underlined.see-through {
                     div.nav-icon.nav-nohide style = "margin-right: auto" {
-                        a href = "/" aria-label = "Go to homepage" {
-                            img src = (self.logo_path) style="height:15px" alt="Logo";
+                        a href = "/" aria-label = "Go to homepage" style="color: inherit; text-decoration: none" {
+                            span style="font-weight: 700; white-space: nowrap" { (self.brand) }
                         }
                     }
                     @for item in &self.items {
