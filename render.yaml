@@ -1,18 +1,18 @@
-# Render Blueprint for easygdpslist.
+# Render Blueprint for boblevelslist.
 #
 # Create it via Render dashboard -> New -> Blueprint -> pick this repository.
 # It provisions a PostgreSQL database and the web service (built from the Dockerfile), and wires
 # them together.
 
 databases:
-  - name: easygdpslist-db
+  - name: boblevelslist-db
     databaseName: pointercrate
     user: pointercrate
     plan: free # note: Render's free Postgres databases expire after a limited period - upgrade for a real list
 
 services:
   - type: web
-    name: easygdpslist
+    name: boblevelslist
     runtime: docker
     dockerfilePath: ./Dockerfile
     plan: free
@@ -20,7 +20,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: easygdpslist-db
+          name: boblevelslist-db
           property: connectionString
       # Used by start.sh to create the `.secret` file that signs access tokens.
       # Generated once by Render and kept stable across deploys.
