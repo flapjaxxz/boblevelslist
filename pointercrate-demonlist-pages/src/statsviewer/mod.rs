@@ -17,7 +17,7 @@ pub(crate) fn stats_viewer_panel() -> Markup {
             p {
                 (tr("statsviewer-panel.info"))
             }
-            a.blue.hover.button #show-stats-viewer href = "/demonlist/statsviewer/ "{
+            a.blue.hover.button #show-stats-viewer href = "/demonlist/statsviewer/" {
                 (tr("statsviewer-panel.button"))
             }
         }

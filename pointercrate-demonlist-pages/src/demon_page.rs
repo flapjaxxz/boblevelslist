@@ -193,13 +193,13 @@ impl DemonPage {
                 div.underlined {
                     h1 #demon-heading style = "overflow: hidden"{
                         @if self.data.demon.base.position != 1 {
-                            a href=(format!("/demonlist/{:?}", self.data.demon.base.position - 1)) {
+                            a href=(format!("/demonlist/{:?}/", self.data.demon.base.position - 1)) {
                                 i class="fa fa-chevron-left" style="padding-right: 5%" {}
                             }
                         }
                         (name)
                         @if position as usize != self.demonlist.len() {
-                            a href=(format!("/demonlist/{:?}", position + 1)) {
+                            a href=(format!("/demonlist/{:?}/", position + 1)) {
                                 i class="fa fa-chevron-right" style="padding-left: 5%" {}
                             }
                         }

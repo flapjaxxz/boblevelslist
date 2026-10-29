@@ -71,13 +71,13 @@ impl Render for P<'_> {
     fn render(&self) -> Markup {
         if let Some(id) = self.1 {
             html! {
-                a.underdotted #(id) href = {"/demonlist/statsviewer?player="(self.0.id)} data-id = (self.0.id) target = "_blank" {
+                a.underdotted #(id) href = {"/demonlist/statsviewer/?player="(self.0.id)} data-id = (self.0.id) target = "_blank" {
                     (self.0.name)
                 }
             }
         } else {
             html! {
-                a.underdotted href = {"/demonlist/statsviewer?player="(self.0.id)} data-id = (self.0.id) target = "_blank" {
+                a.underdotted href = {"/demonlist/statsviewer/?player="(self.0.id)} data-id = (self.0.id) target = "_blank" {
                     (self.0.name)
                 }
             }
