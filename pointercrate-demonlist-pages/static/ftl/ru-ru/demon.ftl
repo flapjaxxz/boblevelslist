@@ -188,3 +188,5 @@ demon-creator-dialog = Добавление креатора
     .submit = Добавить креатора
 
     .edit-success = Креатор добавлен успешно!
+
+demon-gd-level-id = ID уровня в GD: { $level-id }

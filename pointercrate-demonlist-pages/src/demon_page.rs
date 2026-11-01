@@ -266,6 +266,11 @@ impl DemonPage {
                             }
                         }
                     }
+                    @if let Some(level_id) = self.data.demon.level_id {
+                        h3 {
+                            (trp!("demon-gd-level-id", "level-id" = level_id.to_string()))
+                        }
+                    }
                 }
                 @if let Some(ref level) = self.integration {
                     @if let Some(Thunk::Processed(ref description)) = level.description {
