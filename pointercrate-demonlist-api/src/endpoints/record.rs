@@ -338,38 +338,34 @@ pub async fn delete_note(record_id: i32, note_id: i32, mut auth: Auth<ApiToken>)
     Ok(Status::NoContent)
 }
 
-async fn validate(record_id: i32, video: String, body: serde_json::Value, mut connection: PoolConnection<Postgres>) {
+async fn validate(record_id: i32, video: String, body: serde_json::Value, _connection: PoolConnection<Postgres>) {
     debug!("Verifying that submission {} with video {} actually is valid", record_id, video);
 
+    // NOTE: A failed check used to delete the submission. That loses real records whenever the video host
+    // refuses requests from a cloud server (YouTube regularly does), so the record is now always kept in
+    // the queue for a list helper to review, and we only log that the check failed.
     match reqwest::get(&video).await {
         Ok(response) => {
             let status = response.status().as_u16();
 
             if (200..400).contains(&status) {
                 debug!("GET request yielded some sort of successful response, executing webhook");
-
-                execute_webhook(body).await;
             } else {
-                warn!("Server response to 'GET {}' was {:?}, deleting submission!", video, response);
-
-                match FullRecord::delete_by_id(record_id, &mut connection).await {
-                    Ok(_) => (),
-                    Err(error) => error!("INTERNAL SERVER ERROR: Failure to delete record - {:?}!", error),
-                }
+                warn!(
+                    "Server response to 'GET {}' was {:?}; keeping submission {} for manual review",
+                    video, response, record_id
+                );
             }
         },
         Err(error) => {
-            error!(
-                "INTERNAL SERVER ERROR: GET request to verify video failed: {:?}. Deleting submission",
-                error
+            warn!(
+                "GET request to verify video of submission {} failed: {:?}; keeping it for manual review",
+                record_id, error
             );
-
-            match FullRecord::delete_by_id(record_id, &mut connection).await {
-                Ok(_) => (),
-                Err(error) => error!("INTERNAL SERVER ERROR: Failure to delete record - {:?}!", error),
-            }
         },
     }
+
+    execute_webhook(body).await;
 }
 
 async fn execute_webhook(body: serde_json::Value) {
