@@ -46,6 +46,7 @@ export class DemonManager extends FilteredPaginator {
 
     this._position = document.getElementById("demon-position");
     this._requirement = document.getElementById("demon-requirement");
+    this._level_id = document.getElementById("demon-level-id");
 
     this._verifier = document.getElementById("demon-verifier");
     this._publisher = document.getElementById("demon-publisher");
@@ -102,6 +103,29 @@ export class DemonManager extends FilteredPaginator {
     });
 
     requirementForm.addErrorOverride(42212, "demon-requirement-edit");
+
+    let levelIdForm = setupFormDialogEditor(
+      new PaginatorEditorBackend(this, false),
+      "demon-level-id-dialog",
+      "demon-level-id-pen",
+      this.output
+    );
+
+    levelIdForm.addValidators({
+      "demon-level-id-edit": {
+        [tr("demonlist", "demon", "demon-id.validator-rangeunderflow")]:
+          rangeUnderflow,
+        [tr("demonlist", "demon", "demon-id.validator-valuemissing")]:
+          valueMissing,
+        [tr("demonlist", "demon", "demon-id.validator-badinput")]: badInput,
+        [tr("demonlist", "demon", "demon-id.validator-stepmismatch")]:
+          stepMismatch,
+      },
+    });
+
+    // 42235: not a valid (positive) level id, 42236: another demon already uses this level id
+    levelIdForm.addErrorOverride(42235, "demon-level-id-edit");
+    levelIdForm.addErrorOverride(42236, "demon-level-id-edit");
 
     let positionForm = setupFormDialogEditor(
       new PaginatorEditorBackend(this, true),
@@ -163,6 +187,10 @@ export class DemonManager extends FilteredPaginator {
     this._name.innerText = this.currentObject.name;
     this._position.innerText = this.currentObject.position;
     this._requirement.innerText = this.currentObject.requirement;
+    this._level_id.innerText =
+      this.currentObject.level_id === null || this.currentObject.level_id === undefined
+        ? "\u2014"
+        : this.currentObject.level_id;
 
     var embeddedVideo = embedVideo(this.currentObject.video);
 

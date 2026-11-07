@@ -34,6 +34,7 @@ error-demonlist-alreadyclaimed = This player already has a verified claim associ
 error-demonlist-rawrequired = Raw footage much be provided to submit this record
 error-demonlist-malformedrawurl = Raw footage needs to be a valid URL
 error-demonlist-invalidlevelid = Level ID needs to be positive
+error-demonlist-levelidtaken = Another demon already uses this level ID
 
 error-demonlist-ratelimit-record-submit = You're submitting too many records too fast!
 error-demonlist-ratelimit-record-submit-global = Too many records are being submitted right now!

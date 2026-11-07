@@ -7,6 +7,9 @@ demon-password = Пароль от уровня
 
 demon-id = ID уровня
     .validator-rangeunderflow = ID уровня должен быть положительным
+    .validator-valuemissing = Укажите ID уровня
+    .validator-badinput = ID уровня должен быть числом
+    .validator-stepmismatch = ID уровня не должен быть дробным
 
 demon-length = Длина уровня
 
@@ -121,6 +124,7 @@ demon-viewer = Демон #
     .thumbnail-field = { demon-thumbnail }:
     .position-field = { demon-position }:
     .requirement-field = { demon-requirement }:
+    .level-id-field = { demon-id }:
     .publisher-field = { demon-publisher }:
     .verifier-field = { demon-verifier }:
     .creators-field = { demon-creators }:
@@ -173,6 +177,11 @@ demon-position-dialog = Изменение позиции демона
 demon-requirement-dialog = Изменение требования к рекордам на демоне
     .info = Здесь проходит изменение требования к рекордам для этого демона. Требование Должно быть между 0 и 100 включительно.
     .requirement-field = Требование:
+    .submit = Изменить
+
+demon-level-id-dialog = Изменение ID уровня
+    .info = Здесь можно изменить ID уровня в Geometry Dash для этого демона. Каждый ID уровня может использоваться только одним демоном.
+    .level-id-field = { demon-id }:
     .submit = Изменить
 
 demon-publisher-dialog = Изменение публикатора демона

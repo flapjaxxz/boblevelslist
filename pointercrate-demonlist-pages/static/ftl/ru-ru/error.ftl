@@ -33,6 +33,7 @@ error-demonlist-alreadyclaimed = Этот игрок уже имеет связ�
 error-demonlist-rawrequired = Для отправки рекорда необходимо предоставить необработанную запись
 error-demonlist-malformedrawurl = Необработанная запись должна быть в виде правильно оформленной ссылки
 error-demonlist-invalidlevelid = ID уровня должен быть положительным
+error-demonlist-levelidtaken = Другой демон уже использует этот ID уровня
 
 error-demonlist-ratelimit-record-submit = Вы отправляете слишком много рекордов слишком часто!
 error-demonlist-ratelimit-record-submit-global = Слишком много рекордов отправляется на данный момент!

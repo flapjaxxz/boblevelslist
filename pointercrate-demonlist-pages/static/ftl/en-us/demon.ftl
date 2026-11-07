@@ -7,6 +7,9 @@ demon-password = Level Password
 
 demon-id = Level ID
     .validator-rangeunderflow = Level ID must be positive
+    .validator-valuemissing = Please specify a level ID
+    .validator-badinput = Level ID must be a valid number
+    .validator-stepmismatch = Level ID mustn't be a decimal
 
 demon-length = Level Length
 
@@ -119,6 +122,7 @@ demon-viewer = Demon #
     .thumbnail-field = { demon-thumbnail }:
     .position-field = { demon-position }:
     .requirement-field = { demon-requirement }:
+    .level-id-field = { demon-id }:
     .publisher-field = { demon-publisher }:
     .verifier-field = { demon-verifier }:
     .creators-field = { demon-creators }:
@@ -171,6 +175,11 @@ demon-position-dialog = Change demon position
 demon-requirement-dialog = Change demon requirement
     .info = Change the record requirement for this demon. Has be lie between 0 and and 100 (inclusive).
     .requirement-field = Requirement:
+    .submit = Edit
+
+demon-level-id-dialog = Change level ID
+    .info = Change the Geometry Dash level ID of this demon. Each level ID can only be used by one demon.
+    .level-id-field = { demon-id }:
     .submit = Edit
 
 demon-publisher-dialog = Change demon publisher

@@ -198,6 +198,13 @@ pub enum DemonlistError {
     ///
     /// Error Code `42235`
     InvalidLevelId,
+
+    /// `422 UNPROCESSABLE ENTITY` variant
+    ///
+    /// Error Code `42236`
+    ///
+    /// Another demon already uses this Geometry Dash level ID
+    LevelIdTaken,
 }
 
 impl std::error::Error for DemonlistError {}
@@ -244,6 +251,7 @@ impl PointercrateError for DemonlistError {
             RawRequired => 42232,
             MalformedRawUrl => 42233,
             InvalidLevelId => 42235,
+            LevelIdTaken => 42236,
         }
     }
 }
@@ -312,6 +320,7 @@ impl Display for DemonlistError {
                 DemonlistError::RawRequired => tr("error-demonlist-rawrequired"),
                 DemonlistError::MalformedRawUrl => tr("error-demonlist-malformedrawurl"),
                 DemonlistError::InvalidLevelId => tr("error-demonlist-invalidlevelid"),
+                DemonlistError::LevelIdTaken => tr("error-demonlist-levelidtaken"),
             }
         )
     }

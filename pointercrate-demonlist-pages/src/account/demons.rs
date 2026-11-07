@@ -99,6 +99,15 @@ impl AccountPageTab for DemonsTab {
                                 div.stats-container.flex.space  {
                                     span{
                                         b {
+                                            i.fa.fa-pencil-alt.clickable #demon-level-id-pen aria-hidden = "true" {} " " (tr("demon-viewer.level-id-field"))
+                                        }
+                                        br;
+                                        span #demon-level-id {}
+                                    }
+                                }
+                                div.stats-container.flex.space  {
+                                    span{
+                                        b {
                                             i.fa.fa-pencil-alt.clickable #demon-publisher-pen aria-hidden = "true" {} " " (tr("demon-viewer.publisher-field"))
                                         }
                                         br;
@@ -134,6 +143,7 @@ impl AccountPageTab for DemonsTab {
             (change_name_dialog())
             (change_position_dialog())
             (change_requirement_dialog())
+            (change_level_id_dialog())
             (change_video_dialog())
             (change_thumbnail_dialog())
             (change_verifier_dialog())
@@ -204,6 +214,32 @@ fn change_requirement_dialog() -> Markup {
                         p.error {}
                     }
                     input.button.blue.hover type = "submit" style = "margin: 15px auto 0px;" value = (tr("demon-requirement-dialog.submit"));
+                }
+            }
+        }
+    }
+}
+
+fn change_level_id_dialog() -> Markup {
+    html! {
+        div.overlay.closable {
+            div.dialog #demon-level-id-dialog {
+                span.plus.cross.hover {}
+                h2.underlined.pad {
+                    (tr("demon-level-id-dialog"))
+                }
+                p style = "max-width: 400px"{
+                    (tr("demon-level-id-dialog.info"))
+                }
+                form.flex.col novalidate = "" {
+                    p.info-red.output {}
+                    p.info-green.output {}
+                    span.form-input #demon-level-id-edit {
+                        label for = "level_id" {(tr("demon-level-id-dialog.level-id-field")) }
+                        input name = "level_id" type = "number" min = "1" step = "1" required = "";
+                        p.error {}
+                    }
+                    input.button.blue.hover type = "submit" style = "margin: 15px auto 0px;" value = (tr("demon-level-id-dialog.submit"));
                 }
             }
         }
