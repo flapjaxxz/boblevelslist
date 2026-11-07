@@ -128,6 +128,7 @@ demon-viewer = Демон #
     .publisher-field = { demon-publisher }:
     .verifier-field = { demon-verifier }:
     .creators-field = { demon-creators }:
+    .delete-button = Удалить демон
 
 demon-add-panel = Добавление демона
     .button = Добавить демон!
@@ -178,6 +179,8 @@ demon-requirement-dialog = Изменение требования к рекор
     .info = Здесь проходит изменение требования к рекордам для этого демона. Требование Должно быть между 0 и 100 включительно.
     .requirement-field = Требование:
     .submit = Изменить
+
+demon-delete-confirm = Удалить этот демон вместе со всеми его рекордами и записями о создателях? Это действие нельзя отменить.
 
 demon-level-id-dialog = Изменение ID уровня
     .info = Здесь можно изменить ID уровня в Geometry Dash для этого демона. Каждый ID уровня может использоваться только одним демоном.

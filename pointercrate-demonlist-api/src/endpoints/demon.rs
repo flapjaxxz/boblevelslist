@@ -107,6 +107,21 @@ pub async fn patch(
 }
 
 #[localized]
+#[rocket::delete("/<demon_id>/")]
+pub async fn delete(demon_id: i32, mut auth: Auth<ApiToken>) -> Result<Status> {
+    // Destructive (also removes all records on the demon), so this is restricted to list administrators
+    auth.require_permission(LIST_ADMINISTRATOR)?;
+
+    let demon = Demon::by_id(demon_id, &mut auth.connection).await?;
+
+    demon.delete(&mut auth.connection).await?;
+
+    auth.commit().await?;
+
+    Ok(Status::NoContent)
+}
+
+#[localized]
 #[rocket::post("/<demon_id>/creators/", data = "<creator>")]
 pub async fn post_creator(demon_id: i32, mut auth: Auth<ApiToken>, creator: Json<PostCreator>) -> Result<Response2<Json<()>>> {
     auth.require_permission(LIST_MODERATOR)?;

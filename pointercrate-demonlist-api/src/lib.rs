@@ -84,6 +84,7 @@ pub fn setup(rocket: Rocket<Build>) -> Rocket<Build> {
                 endpoints::demon::audit,
                 endpoints::demon::movement_log,
                 endpoints::demon::patch,
+                endpoints::demon::delete,
                 endpoints::demon::post,
                 endpoints::demon::post_creator,
                 endpoints::demon::delete_creator

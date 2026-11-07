@@ -3,7 +3,7 @@ use maud::{html, Markup, PreEscaped};
 use pointercrate_core::{localization::tr, permission::PermissionsManager};
 use pointercrate_core_pages::trp_html;
 use pointercrate_core_pages::util::filtered_paginator;
-use pointercrate_demonlist::LIST_MODERATOR;
+use pointercrate_demonlist::{LIST_ADMINISTRATOR, LIST_MODERATOR};
 use pointercrate_user::auth::{AuthenticatedUser, NonMutating};
 use pointercrate_user_pages::account::AccountPageTab;
 use sqlx::PgConnection;
@@ -35,8 +35,11 @@ impl AccountPageTab for DemonsTab {
     }
 
     async fn content(
-        &self, _user: &AuthenticatedUser<NonMutating>, _permissions: &PermissionsManager, _connection: &mut PgConnection,
+        &self, user: &AuthenticatedUser<NonMutating>, permissions: &PermissionsManager, _connection: &mut PgConnection,
     ) -> Markup {
+        // deleting a demon is restricted to list administrators (also enforced by the API)
+        let can_delete = permissions.require_permission(user.user().permissions, LIST_ADMINISTRATOR).is_ok();
+
         html! {
             div.left {
                 (demon_submitter())
@@ -129,6 +132,13 @@ impl AccountPageTab for DemonsTab {
                                         br;
                                         span #demon-creators {}
 
+                                    }
+                                }
+                                @if can_delete {
+                                    div.stats-container.flex.cen {
+                                        a.button.red.hover #demon-delete-button style = "margin: 15px 0px 5px" {
+                                            (tr("demon-viewer.delete-button"))
+                                        }
                                     }
                                 }
                             }

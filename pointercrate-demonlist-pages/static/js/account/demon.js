@@ -127,6 +127,36 @@ export class DemonManager extends FilteredPaginator {
     levelIdForm.addErrorOverride(42235, "demon-level-id-edit");
     levelIdForm.addErrorOverride(42236, "demon-level-id-edit");
 
+    // Only rendered for list administrators
+    let deleteButton = document.getElementById("demon-delete-button");
+
+    if (deleteButton) {
+      deleteButton.addEventListener("click", () => {
+        let demon = this.currentObject;
+
+        if (!demon) {
+          return;
+        }
+
+        if (
+          !window.confirm(
+            demon.name +
+              ": " +
+              tr("demonlist", "demon", "demon-delete-confirm")
+          )
+        ) {
+          return;
+        }
+
+        del("/api/v2/demons/" + demon.id + "/")
+          .then(() => {
+            this.output.hideContent();
+            this.refresh();
+          })
+          .catch(displayError(this.output));
+      });
+    }
+
     let positionForm = setupFormDialogEditor(
       new PaginatorEditorBackend(this, true),
       "demon-position-dialog",

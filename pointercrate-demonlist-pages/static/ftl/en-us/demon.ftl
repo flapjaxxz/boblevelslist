@@ -126,6 +126,7 @@ demon-viewer = Demon #
     .publisher-field = { demon-publisher }:
     .verifier-field = { demon-verifier }:
     .creators-field = { demon-creators }:
+    .delete-button = Delete demon
 
 demon-add-panel = Add Demon
     .button = Add a demon!
@@ -176,6 +177,8 @@ demon-requirement-dialog = Change demon requirement
     .info = Change the record requirement for this demon. Has be lie between 0 and and 100 (inclusive).
     .requirement-field = Requirement:
     .submit = Edit
+
+demon-delete-confirm = Delete this demon together with all of its records and creator entries? This cannot be undone.
 
 demon-level-id-dialog = Change level ID
     .info = Change the Geometry Dash level ID of this demon. Each level ID can only be used by one demon.
