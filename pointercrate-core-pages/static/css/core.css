@@ -89,7 +89,7 @@ footer {
 
 .blue {
   background-color: var(--color-pc-button-bg);
-  color: var(--color-pc-button-text);
+  color: var(--color-gold-button-text);
 }
 
 .blue.hover:not(.disabled):not([disabled]):hover,
@@ -99,7 +99,7 @@ footer {
 
 .blue.hover:not(.disabled):not([disabled]):active {
   background-color: var(--color-pc-button-bg-click);
-  color: var(--color-pc-button-text-click);
+  color: var(--color-gold-button-text-click);
 }
 
 .white {

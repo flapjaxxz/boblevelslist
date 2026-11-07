@@ -20,7 +20,7 @@ tr {
 }
 
 tr:nth-child(even) {
-  background: #e6eeff;
+  background: #fff4cc;
 }
 
 #history-table {
@@ -188,5 +188,5 @@ tr:nth-child(even) {
 
 .ct-series-a .ct-line,
 .ct-series-a .ct-point {
-  stroke: #0881c6;
+  stroke: #f2b705;
 }

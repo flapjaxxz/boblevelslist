@@ -14,9 +14,9 @@
   --color-error-text: #4d0707;
   /* --color-error-accent */
 
-  --color-consider-bg: #D8EFF3;
+  --color-consider-bg: #FCEFC2;
   /* --color-consider-border */
-  --color-consider-text: #326067;
+  --color-consider-text: #5C4A0A;
   /* --color-consider-accent */
 
   --color-text: #444446;
@@ -27,12 +27,15 @@
 
   --color-bg: white;
 
-  --color-link: blue;
+  --color-link: #9C7000;
   --color-link-dark: #f77e39;
 
-  --color-pc-button-bg: #0881c6;
-  --color-pc-button-bg-hover: #076696;
-  --color-pc-button-bg-click: #055075;
+  --color-pc-button-bg: #F2B705;
+  --color-pc-button-bg-hover: #D9A104;
+  --color-pc-button-bg-click: #B88700;
+  /* dark text on the gold buttons (white text is unreadable on gold) */
+  --color-gold-button-text: #1F1A05;
+  --color-gold-button-text-click: #000000;
   --color-pc-button-text: white;
   --color-pc-button-text-click: #eee;
 

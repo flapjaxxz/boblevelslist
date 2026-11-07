@@ -366,7 +366,7 @@ p.error {
   background-color: #ccc;
 }
 
-/* When the checkbox is checked, add a blue background */
+/* When the checkbox is checked, add a gold background */
 .cb-container input:checked ~ .checkmark {
   background-color: var(--color-pc-button-bg);
 }
@@ -389,7 +389,7 @@ p.error {
   top: 2px;
   width: 4px;
   height: 8px;
-  border: solid white;
+  border: solid #1f1a05;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -751,5 +751,5 @@ ul.selection-list li {
 }
 
 .tab-active {
-  color: var(--color-pc-button-bg);
+  color: var(--color-link);
 }
